@@ -4,31 +4,163 @@
  */
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.Timer;
 import static main.main.nuevo;
+import static main.main.username;
+import pokemon.Pikachu;
+import pokemon.Snorlax;
 
 /**
  *
  * @author nelsoncarrillo
  */
-public class Principal1 extends javax.swing.JFrame {
+public final class Principal1 extends javax.swing.JFrame {
     
+    private int saldo;
+    private int segundos;
+    /**
+     *
+     */
+    public void mostrarTiempoTranscurrido() {
+        Timer timer = new Timer(1000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                segundos++;
+                label.setText("Tiempo Transcurrido: "+String.valueOf(segundos)+" s");
+                if(mascota.getAmistad()>0)
+                    mascota.restaram();
+                saldo++;
+                label2.setText("Watts: "+String.valueOf(saldo));
+            }
+        });
+
+        timer.start();
+    }
+    
+    Thread thread = new Thread(new Runnable() {
+    @Override
+    public void run() {
+        while (true) {
+            if (mascota.getAmistad() >= 0 && mascota.getAmistad() < 2000) {
+                String rutaIcono = "/images/sighs.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Sigh");
+                // Ejecutar evento para el rango de 0 a 2000
+                // ...
+            } else if (mascota.getAmistad() >= 2000 && mascota.getAmistad() < 4000) {
+                // Ejecutar evento para el rango de 2000 a 4000
+                // ...
+                String rutaIcono = "/images/angrys.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Angry");
+            } else if (mascota.getAmistad() >= 4000 && mascota.getAmistad() < 6000) {
+                // Ejecutar evento para el rango de 4000 a 6000
+                // ...
+                String rutaIcono = "/images/snorlax.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Normal");
+            } else if (mascota.getAmistad() >= 6000 && mascota.getAmistad() < 8000) {
+                // Ejecutar evento para el rango de 6000 a 8000
+                // ...
+                String rutaIcono = "/images/happys.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Happy");
+            } else if (mascota.getAmistad() >= 8000 && mascota.getAmistad() <= 10000) {
+                // Ejecutar evento para el rango de 8000 a 10000
+                // ...
+                String rutaIcono = "/images/inspireds.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Inspired");
+            }
+
+            try {
+                Thread.sleep(1000); // Pausar durante 1 segundo
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    });
+    
+    
+    
+    public void mainFrame() {
+    addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            // Escribir en un archivo de texto
+            try {
+                FileWriter writer = new FileWriter("test//data.txt", true); // Abre el archivo en modo de apendizaje
+                writer.write(","+username + "," + mascota.toString() + "," + saldo + "," + segundos +","+mascota.getAmistad()+ "\n"); // Agrega un salto de línea al final de cada registro
+                writer.close();
+                thread.interrupt();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    });
+}
+
     private Inicio inicio;
     private Escoger escoger;
-
+    private Snorlax mascota;
+    
+    
+    
     /**
      * Creates new form Principal
+     * @throws java.io.IOException
+     * @throws javax.sound.sampled.UnsupportedAudioFileException
+     * @throws javax.sound.sampled.LineUnavailableException
      */
     public Principal1() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         nuevo.detenerReproduccion();
-            nuevo.reproducirAudio("test//center2.wav");
+        nuevo.reproducirAudio("test//center3.wav");
+        this.mascota = new Snorlax();
+        this.saldo=0;
+        this.mostrarTiempoTranscurrido();
+        this.mainFrame();
+        segundos=0;
+        thread.start();
+        
     }
-
+    
+    
+    public Principal1(int saldou,int time,int ami) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        nuevo.detenerReproduccion();
+        nuevo.reproducirAudio("test//center3.wav");
+        this.mascota = new Snorlax(ami);
+        this.saldo=saldou;
+        segundos = time;
+        this.mostrarTiempoTranscurrido();
+        this.mainFrame();
+        segundos = time;
+        thread.start();
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,13 +171,13 @@ public class Principal1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        pikachu = new javax.swing.JLabel();
+        pikachu2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
+        label2 = new javax.swing.JLabel();
+        estado = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        P = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,38 +185,51 @@ public class Principal1 extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pikachu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/snorlax.png"))); // NOI18N
-        jPanel1.add(pikachu, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 100, 100));
+        pikachu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/snorlax.png"))); // NOI18N
+        jPanel1.add(pikachu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 100, 100));
 
         jLabel1.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         jLabel1.setText("Estado Snorlax:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
-        jLabel2.setText("Tiempo Transcurrido:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        label.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
+        label.setText("Tiempo Transcurrido:");
+        jPanel1.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
-        jLabel3.setText("Watts:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        label2.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
+        label2.setText("Watts:");
+        jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
-        jLabel4.setText("Normal");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
+        estado.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
+        estado.setText("Normal");
+        jPanel1.add(estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
 
+        jButton1.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         jButton1.setText("Ir a Tienda");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 100, -1));
-
-        jButton2.setText("Ver Regalos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 130, -1));
 
+        P.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
+        P.setText("Pokemon");
+        P.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PActionPerformed(evt);
+            }
+        });
+        jPanel1.add(P, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 130, -1));
+
+        jButton3.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         jButton3.setText("Jugar");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 100, -1));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,9 +245,25 @@ public class Principal1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        mascota.showPokemon(estado.getText());
+
+    }//GEN-LAST:event_PActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int aux = saldo;
+        int finale = nuevo.tienda(saldo,mascota);
+        saldo=(saldo-aux)+finale; 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int aux = saldo;
+        int finale = mascota.jugar(saldo);
+        saldo=(saldo-aux)+finale;
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,14 +299,14 @@ public class Principal1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton P;
+    private javax.swing.JLabel estado;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel pikachu;
+    private javax.swing.JLabel label;
+    private javax.swing.JLabel label2;
+    private javax.swing.JLabel pikachu2;
     // End of variables declaration//GEN-END:variables
 }

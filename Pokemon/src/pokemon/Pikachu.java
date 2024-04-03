@@ -28,13 +28,20 @@ public class Pikachu extends Pokemon{
         this.amistad-=1;
     }
     
+    public Pikachu(){
+        
+    }
+    
+    public Pikachu(int a){
+        this.amistad=a;
+    }
+    
     public int getAmistad(){
         return this.amistad;
     }
     
     public void addGift(Regalo gift){
         this.regalos.insertar(gift);
-        System.out.println(regalos.getRoot().getClass());
         this.regalos2.insertFinal(gift);
         this.amistad+=gift.getAmistad();
     }

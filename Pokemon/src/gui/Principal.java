@@ -107,7 +107,7 @@ public final class Principal extends javax.swing.JFrame {
             // Escribir en un archivo de texto
             try {
                 FileWriter writer = new FileWriter("test//data.txt", true); // Abre el archivo en modo de apendizaje
-                writer.write(","+username + "," + mascota.toString() + "," + saldo + "," + segundos + "\n"); // Agrega un salto de línea al final de cada registro
+                writer.write(","+username + "," + mascota.toString() + "," + saldo + "," + segundos +","+mascota.getAmistad()+ "\n"); // Agrega un salto de línea al final de cada registro
                 writer.close();
                 thread.interrupt();
             } catch (IOException ex) {
@@ -136,7 +136,22 @@ public final class Principal extends javax.swing.JFrame {
         nuevo.detenerReproduccion();
         nuevo.reproducirAudio("test//center3.wav");
         this.mascota = new Pikachu();
-        this.saldo=10000;
+        this.saldo=0;
+        this.mostrarTiempoTranscurrido();
+        this.mainFrame();
+        thread.start();
+        
+    }
+    
+    public Principal(int sald,int time, int ami) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        nuevo.detenerReproduccion();
+        nuevo.reproducirAudio("test//center3.wav");
+        this.mascota = new Pikachu(ami);
+        this.saldo=sald;
+        segundos = time;
         this.mostrarTiempoTranscurrido();
         this.mainFrame();
         thread.start();

@@ -1,2 +1,7 @@
 ,3j,pokemon.Pikachu@7b5b5ec5,10002,2
 ,e,pokemon.Pikachu@3220bfd9,10003,3
+,lolo,pokemon.Snorlax@588f8c9d,10007,7
+,ej3,pokemon.Snorlax@201bf681,8516,16
+,sjs,pokemon.Snorlax@73ec135f,10004,4
+,lko,pokemon.Snorlax@16d056d5,10008,12
+,llo,pokemon.Snorlax@66613042,10010,15

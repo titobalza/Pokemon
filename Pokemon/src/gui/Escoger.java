@@ -137,10 +137,19 @@ public class Escoger extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        //Principal1 gu1 = new Principal1();
+        Principal1 gu1=null;
+        try {
+            gu1 = new Principal1();
+        } catch (IOException ex) {
+            Logger.getLogger(Escoger.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Escoger.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Escoger.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Snorlax sno = new Snorlax();
         nuevo.getPokemones().insertFinal(sno);
-        //gu1.setVisible(true);
+        gu1.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 

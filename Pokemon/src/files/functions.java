@@ -131,6 +131,67 @@ public class functions {
     return saldo;
     }
     
+    public int tienda(int saldo,Snorlax pika){
+        String[] opciones = {
+            "Baya Aranja 100 Watts +100 Relación",
+            "Baya Caquic 200 Watts +250 Relación",
+            "Poke ball 300 Watts +400 Relación",
+            "Baya Zreza 400 Watts +550 Relación",
+            "Baya Zanama 500 Watts +700 Relación",
+            "Baya Ziuela 600 Watts +850 Relación",
+            "Baya Zidra 700 Watts +1000 Relación",
+            "Baya Enigma 800 Watts +1150 Relación",
+            "Caramelo raro 900 Watts +1300 Relación"
+        };
+        int precioSeleccionado=0;
+        String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccione una opción:", "Menú de Selección", JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+        
+        // Realizar acciones basadas en la selección
+        if (seleccion != null) {
+            switch (seleccion) {
+                case "Baya Aranja 100 Watts +100 Relación":
+                    precioSeleccionado = 100;
+                    break;
+                case "Baya Caquic 200 Watts +250 Relación":
+                    precioSeleccionado = 200;
+                    break;
+                case "Poke ball 300 Watts +400 Relación":
+                    precioSeleccionado = 300;
+                    break;
+                case "Baya Zreza 400 Watts +550 Relación":
+                    precioSeleccionado = 400;
+                    break;
+                case "Baya Zanama 500 Watts +700 Relación":
+                    precioSeleccionado = 500;
+                    break;
+                case "Baya Ziuela 600 Watts +850 Relación":
+                    precioSeleccionado = 600;
+                    break;
+                case "Baya Zidra 700 Watts +1000 Relación":
+                    precioSeleccionado = 700;
+                    break;
+                case "Baya Enigma 800 Watts +1150 Relación":
+                    precioSeleccionado = 800;
+                    break;
+                case "Caramelo raro 900 Watts +1300 Relación":
+                    precioSeleccionado = 900;
+                    break;
+            }
+            
+            // Validar el saldo
+            if (saldo >= precioSeleccionado) {
+                // Restar el saldo
+                saldo -= precioSeleccionado;
+                Regalo gift = new Regalo(precioSeleccionado);
+                pika.addGift(gift);
+                JOptionPane.showMessageDialog(null, "Compra exitosa. Saldo restante: " + saldo + " Watts");
+            } else {
+                JOptionPane.showMessageDialog(null, "No tienes suficiente saldo para realizar la compra");
+            }
+        }
+    return saldo;
+    }
+    
     public void adjuntarRegalo(int auxFinale,Pikachu pika){
         if(auxFinale>0){
             
