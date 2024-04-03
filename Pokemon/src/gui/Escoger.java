@@ -121,10 +121,11 @@ public class Escoger extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void pikachuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pikachuActionPerformed
-        // TODO add your handling code here:
-        Principal gu = null;
         try {
-            gu = new Principal();
+            // TODO add your handling code here:
+            Principal gu = new Principal();
+            gu.setVisible(true);
+            this.setVisible(false);
         } catch (IOException ex) {
             Logger.getLogger(Escoger.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedAudioFileException ex) {
@@ -132,10 +133,6 @@ public class Escoger extends javax.swing.JFrame {
         } catch (LineUnavailableException ex) {
             Logger.getLogger(Escoger.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Pikachu pika = new Pikachu();
-        nuevo.getPokemones().insertFinal(pika);
-        gu.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_pikachuActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

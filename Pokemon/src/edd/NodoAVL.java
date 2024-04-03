@@ -10,15 +10,14 @@ import files.Regalo;
  *
  * @author nelsoncarrillo
  */
-public class AVLNode {
-    Regalo keyprincipal;
-    int key;
-    int height;
-    AVLNode left, right;
+public class NodoAVL {
+    Regalo regalo;
+    int altura;
+    NodoAVL izquierdo;
+    NodoAVL derecho;
 
-    public AVLNode(Regalo value) {
-        keyprincipal=value;
-        key = value.getCosto();
-        height = 1;
+    public NodoAVL(Regalo value) {
+        regalo=value;
+        altura = 1;
     }
 }

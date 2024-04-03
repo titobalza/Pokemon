@@ -125,7 +125,7 @@ jn.setBorderPainted(false);
             escoger.setVisible(true);
             this.setVisible(false);
         }else{
-            System.out.println("falso");
+            JOptionPane.showMessageDialog(null, "Debe Cargar su Anterior juego o cree un nuevo usuario.");
         }
     }//GEN-LAST:event_jnActionPerformed
 

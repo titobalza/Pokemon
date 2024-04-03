@@ -4,6 +4,7 @@
  */
 package gui;
 
+import javax.swing.Icon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -12,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import static main.main.nuevo;
@@ -46,22 +48,74 @@ public final class Principal extends javax.swing.JFrame {
         timer.start();
     }
     
-    public void mainFrame(){
-    addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                // Escribir en un archivo de texto
-                try {
-                    FileWriter writer = new FileWriter("test//data.txt");
-                    writer.write(username+","+mascota.toString()+","+Integer.toString(saldo)+","+Integer.toString(segundos));
-                    writer.close();
-                    System.out.println("done");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+    Thread thread = new Thread(new Runnable() {
+    @Override
+    public void run() {
+        while (true) {
+            if (mascota.getAmistad() >= 0 && mascota.getAmistad() < 2000) {
+                String rutaIcono = "/images/sighp.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Sigh");
+                // Ejecutar evento para el rango de 0 a 2000
+                // ...
+            } else if (mascota.getAmistad() >= 2000 && mascota.getAmistad() < 4000) {
+                // Ejecutar evento para el rango de 2000 a 4000
+                // ...
+                String rutaIcono = "/images/angryp.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Angry");
+            } else if (mascota.getAmistad() >= 4000 && mascota.getAmistad() < 6000) {
+                // Ejecutar evento para el rango de 4000 a 6000
+                // ...
+                String rutaIcono = "/images/normalp.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Normal");
+            } else if (mascota.getAmistad() >= 6000 && mascota.getAmistad() < 8000) {
+                // Ejecutar evento para el rango de 6000 a 8000
+                // ...
+                String rutaIcono = "/images/happyp.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Happy");
+            } else if (mascota.getAmistad() >= 8000 && mascota.getAmistad() <= 10000) {
+                // Ejecutar evento para el rango de 8000 a 10000
+                // ...
+                String rutaIcono = "/images/inspiredp.png";
+                Icon imagen = new ImageIcon(getClass().getResource(rutaIcono));
+                pikachu2.setIcon(imagen);
+                estado.setText("Inspired");
             }
-        });
+
+            try {
+                Thread.sleep(1000); // Pausar durante 1 segundo
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
+    });
+    
+    
+    
+    public void mainFrame() {
+    addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            // Escribir en un archivo de texto
+            try {
+                FileWriter writer = new FileWriter("test//data.txt", true); // Abre el archivo en modo de apendizaje
+                writer.write(","+username + "," + mascota.toString() + "," + saldo + "," + segundos + "\n"); // Agrega un salto de línea al final de cada registro
+                writer.close();
+                thread.interrupt();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    });
+}
 
     private Inicio inicio;
     private Escoger escoger;
@@ -71,6 +125,9 @@ public final class Principal extends javax.swing.JFrame {
     
     /**
      * Creates new form Principal
+     * @throws java.io.IOException
+     * @throws javax.sound.sampled.UnsupportedAudioFileException
+     * @throws javax.sound.sampled.LineUnavailableException
      */
     public Principal() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         initComponents();
@@ -82,6 +139,7 @@ public final class Principal extends javax.swing.JFrame {
         this.saldo=10000;
         this.mostrarTiempoTranscurrido();
         this.mainFrame();
+        thread.start();
         
     }
 
@@ -95,25 +153,26 @@ public final class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        pikachu = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        pikachu2 = new javax.swing.JLabel();
+        estado = new javax.swing.JLabel();
         label = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         Pokemon = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pikachu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pikachunormal.png"))); // NOI18N
-        jPanel1.add(pikachu, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 100, 100));
+        pikachu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/normalp.png"))); // NOI18N
+        jPanel1.add(pikachu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 100, 100));
 
-        jLabel1.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
-        jLabel1.setText("Estado Pikachu:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
+        estado.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
+        estado.setText("Sigh");
+        jPanel1.add(estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
         label.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         label.setText("Tiempo Transcurrido:");
@@ -150,6 +209,10 @@ public final class Principal extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 150, -1));
 
+        jLabel2.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
+        jLabel2.setText("Estado Pikachu:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,7 +229,7 @@ public final class Principal extends javax.swing.JFrame {
 
     private void PokemonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PokemonActionPerformed
         // TODO add your handling code here:
-        mascota.showPokemon();
+        mascota.showPokemon(estado.getText());
         
     }//GEN-LAST:event_PokemonActionPerformed
 
@@ -218,12 +281,13 @@ public final class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pokemon;
+    private javax.swing.JLabel estado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label;
     private javax.swing.JLabel label2;
-    private javax.swing.JLabel pikachu;
+    private javax.swing.JLabel pikachu2;
     // End of variables declaration//GEN-END:variables
 }

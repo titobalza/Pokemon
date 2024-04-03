@@ -1,1 +1,2 @@
-ldkh,pokemon.Pikachu@30b86707,10009,9
+,3j,pokemon.Pikachu@7b5b5ec5,10002,2
+,e,pokemon.Pikachu@3220bfd9,10003,3

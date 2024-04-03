@@ -32,7 +32,7 @@ public class functions {
         try (BufferedReader br = new BufferedReader(new FileReader("test/data.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                if (linea.contains(nombreUsuario)) {
+                if (linea.contains(","+nombreUsuario+",")) {
                     return false; // El nombre de usuario ya existe en el archivo
                 }
             }

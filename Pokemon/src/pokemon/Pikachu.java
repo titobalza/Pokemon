@@ -33,7 +33,7 @@ public class Pikachu extends Pokemon{
     }
     
     public void addGift(Regalo gift){
-        this.regalos.insert(this.regalos.getRoot(),gift);
+        this.regalos.insertar(gift);
         System.out.println(regalos.getRoot().getClass());
         this.regalos2.insertFinal(gift);
         this.amistad+=gift.getAmistad();
@@ -112,13 +112,13 @@ public class Pikachu extends Pokemon{
             }
         }
         
-    public void showPokemon(){
+    public void showPokemon(String estado){
         String finali = "";
-        System.out.println(this.regalos.inOrder(this.regalos.getRoot()));
+        finali = this.regalos.recorridoInorden();
         if (!finali.equals("")){
-            JOptionPane.showMessageDialog(null, "Amistad: "+this.amistad+"\n"+"Estado Emocional: "+"\n"+finali);
+            JOptionPane.showMessageDialog(null, "Amistad: "+this.amistad+"\n"+"Estado Emocional: "+estado+"\n"+"Ha recibido: "+"\n"+finali);
         }else{
-            JOptionPane.showMessageDialog(null, "Amistad: "+this.amistad+"\n"+"Estado Emocional: "+"\n"+"No ha recibido regalos.");
+            JOptionPane.showMessageDialog(null, "Amistad: "+this.amistad+"\n"+"Estado Emocional: "+estado+"\n"+"No ha recibido regalos.");
         }
     }
 

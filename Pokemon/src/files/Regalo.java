@@ -9,7 +9,7 @@ package files;
  * @author nelsoncarrillo
  */
 public class Regalo {
-    private int costo;
+    public int costo;
     public int amistad;
     private String nombre;
     
