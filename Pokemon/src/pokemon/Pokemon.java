@@ -1,5 +1,8 @@
 package pokemon;
 
+import edd.AVLTree;
+import edd.Lista;
+
 /** Superclase de pikachu y pachirisu, para instanciarlos a la hora de elegir con cu&aacutel jugar.
  *  sus subclases pues son pikachu y pachirisu, ellos extienden sus atributos y methods.
  *
@@ -8,6 +11,8 @@ package pokemon;
  */
 abstract class Pokemon {
     int amistad; //Atributo de cada pokemon.
+    AVLTree regalos = new AVLTree();
+    Lista regalos2=new Lista();
     
     /**
     * Permite abrir el juego de las apuestas.
@@ -18,7 +23,7 @@ abstract class Pokemon {
     * @version 1.0 17 enero 2024
     * @param user instancia del usuario que apostar&aacute y gana o pierde watts.
     */
-    abstract void jugar(Usuario us);
+    abstract int jugar(int saldo);
     abstract void verAmistad();
     
     /**

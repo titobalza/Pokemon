@@ -4,6 +4,7 @@
  */
 package main;
 
+import files.functions;
 import gui.Inicio;
 import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
@@ -15,12 +16,16 @@ import javax.swing.JOptionPane;
  * @author nelsoncarrillo
  */
 public class main {
-
+    
+    public static functions nuevo;
+    public static String username ="";
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         // TODO code application logic here
+        
+        nuevo = new functions();
         Inicio menu = new Inicio();
         menu.setVisible(true);
         
@@ -70,5 +75,7 @@ public class main {
         JOptionPane.showMessageDialog(null, "Fin del juego. ¡Gracias por jugar!");
     **/
     } 
+    
+    
     
 }

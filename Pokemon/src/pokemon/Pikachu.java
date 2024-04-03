@@ -1,6 +1,10 @@
 package pokemon;
+import files.Regalo;
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 /**
  * Subclase de pokemon.
@@ -11,7 +15,6 @@ import java.util.Scanner;
  * @version 1.0 17 enero 2024
  */
 public class Pikachu extends Pokemon{
-    Scanner myObje = new Scanner(System.in); //para los inputs por consola.
     
     /**
     * Disminuye en 1 unidad la amistad del pikachu.
@@ -25,138 +28,120 @@ public class Pikachu extends Pokemon{
         this.amistad-=1;
     }
     
-    /**
-    * Se le da la amistad proveniente de un regalo.
-    * La unica manera de obtener amistad es mediante un regalo
-    * y asi se le suma su valor.
-    * 
-    * @author nelsoncarrillo
-    * @version 1.0 17 enero 2024.
-    * @param n integer de la cantidad de amistad.
-    */
-    public void darAmistad(int n){
-        this.amistad+=n;
-    }
-    
-    /**
-    * Devuelve la amistad de la instancia del pikachu.
-    * Es el getter del atributo amistad del pikachu.
-    * 
-    *
-    * @author nelsoncarrillo
-    * @version 1.0 17 enero 2024   
-    * @return Integer de la amistad del pikachu a un instante dado
-    */
-    public long getAmistad(){
+    public int getAmistad(){
         return this.amistad;
     }
     
-    /**
-    * Imprime por pantalla el ascii art del pikachu acorde a su amistad.
-    * Se especifican unos rangos del nivel de amistad que sabemos que va de 0
-    * hasta 10000 y entre ellos la actitud del pikachu cambia.
-    * 
-    *
-    * @author nelsoncarrillo
-    * @version 1.0 17 enero 2024   
-    */
-    public void verAmistad(){
-        System.out.println("");
-        System.out.println("NIVEL DE AMISTAD:    "+this.amistad);
-        if(10000>= this.amistad & this.amistad >=7500){
-            System.out.println("");
-            System.out.println(" |\\---/|");
-            System.out.println(" | ^_^ |");
-            System.out.println("  \\_^_/");
-        } else if(7500> this.amistad & this.amistad >=5000){
-                        System.out.println("");
-            System.out.println(" |\\---/|");
-            System.out.println(" | O_O |");
-            System.out.println("  \\_^_/");
-        }else if(5000> this.amistad & this.amistad >=2500){
-                        System.out.println("");
-
-            System.out.println(" |\\---/|");
-            System.out.println(" | >_< |");
-            System.out.println("  \\_^_/");
-        }else if(2500> this.amistad & this.amistad >=0){
-                        System.out.println("");
-            System.out.println(" |\\---/|");
-            System.out.println(" | T_T |");
-            System.out.println("  \\_^_/");
-        }
-        System.out.println("");
+    public void addGift(Regalo gift){
+        this.regalos.insert(this.regalos.getRoot(),gift);
+        System.out.println(regalos.getRoot().getClass());
+        this.regalos2.insertFinal(gift);
+        this.amistad+=gift.getAmistad();
     }
-    
-    /**
-    * Permite abrir el juego de las apuestas.
-    * M&eacutetodo propuesto a polimorfismo tanto para pikachu como 
-    * pachirisu.
-    * 
-    * @author nelsoncarrillo
-    * @version 1.0 17 enero 2024
-    * @param user instancia del usuario que apostar&aacute y gana o pierde watts.
-    */
-    void jugar(Usuario user){
-        int opt=0;
-        int apt=0;
-        Random r = new Random();
-        int cartaActual = r.nextInt(10) + 1;
-        while(opt==0){
-            System.out.println("");
-            System.out.println("LA CARTA ACTUAL DE PIKACHU: " +cartaActual);
-            System.out.println("Ingrese 1 para ingresar apuesta a que sera mayor.");
-            System.out.println("Ingrese 2 para ingresar apuesta a que sera menor.");
-            System.out.println("Ingrese 3 para regresar.");
-            while(opt!=1 & opt!=2 & opt!=3){
-            System.out.println("Ingrese ->");
-            opt= myObje.nextInt();
-            }
-            if(opt==1){
-                System.out.println("");
-                System.out.println("INGRESE apuesta: "); 
-                apt= myObje.nextInt();
-                boolean t = user.apostar(apt);
-                if(t==true){
-                    int cartaActul = r.nextInt(10) + 1;
-                    System.out.println("CARTA EN MESA: "+cartaActul);
-                    if(cartaActul>cartaActual){
-                        user.ganarapostar(apt);
-                    }else {
-                        user.perderapostar(apt);
-                    }
-                    cartaActual=cartaActul;
-                }
 
-            }else if (opt==3){
-                break;
-            }else if (opt==2){
-                System.out.println("");
-                System.out.println("INGRESE apuesta: "); 
-                apt= myObje.nextInt();
-                boolean t = user.apostar(apt);
-                if(t==true){
-                    int cartaActul = r.nextInt(10) + 1;
-                    System.out.println("CARTA EN MESA: "+cartaActul);
-                    if(cartaActul<cartaActual){
-                        user.ganarapostar(apt);
-                    }else {
-                        user.perderapostar(apt);
-                    }
-                    cartaActual=cartaActul;
-                }
-                
+    @Override
+    public int jugar(int saldo) {
+            Random random = new Random();
+
+            // Generar el número aleatorio de la carta escogida por el Pokémon
+            int cartaPokemon = random.nextInt(13) + 1;
+            String cartaPokemonTexto = obtenerTextoCarta(cartaPokemon);
+
+            // Mostrar la carta escogida por el Pokémon al usuario
+            JOptionPane.showMessageDialog(null, "El Pokémon ha escogido inicialmente la carta: " + cartaPokemonTexto);
+
+            // Solicitar al usuario que elija si la siguiente carta será más alta o más baja
+            int opcion = JOptionPane.showOptionDialog(null, "¿La siguiente carta será más alta o más baja?", "Juego de la carta más alta", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Más alta", "Más baja"}, null);
+            
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
+            JSpinner spinner = new JSpinner(spinnerModel);
+        
+            // Mostrar un cuadro de diálogo para que el usuario ingrese su apuesta
+            JOptionPane.showMessageDialog(null, spinner, "Ajuste su apuesta", JOptionPane.PLAIN_MESSAGE);
+
+            // Obtener el valor seleccionado por el usuario
+            int apuesta = (int) spinner.getValue();
+            while(apuesta>saldo){
+                JOptionPane.showMessageDialog(null, "Saldo Insuficiente.");
+                 spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
+             spinner = new JSpinner(spinnerModel);
+        
+            // Mostrar un cuadro de diálogo para que el usuario ingrese su apuesta
+            JOptionPane.showMessageDialog(null, spinner, "Ajuste su apuesta", JOptionPane.PLAIN_MESSAGE);
+
+            // Obtener el valor seleccionado por el usuario
+             apuesta = (int) spinner.getValue();
+            }
+            
+            // Generar el número aleatorio de la siguiente carta
+            int siguienteCarta = random.nextInt(13) + 1;
+            String siguienteCartaTexto = obtenerTextoCarta(siguienteCarta);
+
+            // Mostrar la siguiente carta al jugador
+            JOptionPane.showMessageDialog(null, "La siguiente carta es: " + siguienteCartaTexto);
+
+            // Comparar la carta del Pokémon con la siguiente carta y determinar el resultado
+            String resultado = "";
+            if ((opcion == 0 && siguienteCarta > cartaPokemon) || (opcion == 1 && siguienteCarta < cartaPokemon)) {
+                resultado = "¡Has ganado!";
+                // Mostrar el resultado al jugador
+            JOptionPane.showMessageDialog(null, resultado);
+                return saldo+apuesta;
+            } else {
+                resultado = "Lo siento, has perdido.";
+                // Mostrar el resultado al jugador
+            JOptionPane.showMessageDialog(null, resultado);
+                return saldo-apuesta;
+            }
+
+            
+        }
+
+        private static String obtenerTextoCarta(int numeroCarta) {
+            switch (numeroCarta) {
+                case 1:
+                    return "A";
+                case 11:
+                    return "J";
+                case 12:
+                    return "Q";
+                case 13:
+                    return "K";
+                default:
+                    return String.valueOf(numeroCarta);
             }
         }
         
+    public void showPokemon(){
+        String finali = "";
+        System.out.println(this.regalos.inOrder(this.regalos.getRoot()));
+        if (!finali.equals("")){
+            JOptionPane.showMessageDialog(null, "Amistad: "+this.amistad+"\n"+"Estado Emocional: "+"\n"+finali);
+        }else{
+            JOptionPane.showMessageDialog(null, "Amistad: "+this.amistad+"\n"+"Estado Emocional: "+"\n"+"No ha recibido regalos.");
+        }
+    }
+
+    @Override
+    void verAmistad() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    void darAmistad(int n) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     }
 
     
     
     
     
+    
+    
+    
 
-    }
+    
 
 
 

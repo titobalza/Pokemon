@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
+import static main.main.username;
 
 /**
  *
@@ -117,8 +118,8 @@ jn.setBorderPainted(false);
 
     private void jnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnActionPerformed
         // TODO add your handling code here:
-        String name = JOptionPane.showInputDialog("Ingrese username:");
-        if(nuevo.validarUsuario(name)){
+        username = JOptionPane.showInputDialog("Ingrese username:");
+        if(nuevo.validarUsuario(username)){
             System.out.println("correcto");
             this.escoger = new Escoger();
             escoger.setVisible(true);

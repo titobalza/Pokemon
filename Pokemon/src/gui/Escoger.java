@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import static main.main.nuevo;
+import pokemon.*;
 
 /**
  *
@@ -36,7 +38,6 @@ public class Escoger extends javax.swing.JFrame {
         }
     }
 
-    functions nuevo = new functions();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +51,8 @@ public class Escoger extends javax.swing.JFrame {
         pikachu = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,15 +60,37 @@ public class Escoger extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pikachu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Normal.png"))); // NOI18N
+        pikachu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pikachuActionPerformed(evt);
+            }
+        });
         jPanel1.add(pikachu, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 80, 80));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Normal-2.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 80, 80));
 
         jLabel2.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 0, 102));
-        jLabel2.setText("Escoja su pokemon");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, -1, 40));
+
+        jLabel3.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 0, 102));
+        jLabel3.setText("Escoja su pokemon");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
+
+        jButton1.setText("O presione aquí para tener los 2");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/7951512.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -83,6 +108,44 @@ public class Escoger extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //Principal2 gu2 = new Principal2();
+        Snorlax sno = new Snorlax();
+        Pikachu pika = new Pikachu();
+        nuevo.getPokemones().insertFinal(pika);
+        nuevo.getPokemones().insertFinal(sno);
+        //gu2.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pikachuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pikachuActionPerformed
+        // TODO add your handling code here:
+        Principal gu = null;
+        try {
+            gu = new Principal();
+        } catch (IOException ex) {
+            Logger.getLogger(Escoger.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Escoger.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Escoger.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Pikachu pika = new Pikachu();
+        nuevo.getPokemones().insertFinal(pika);
+        gu.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_pikachuActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        //Principal1 gu1 = new Principal1();
+        Snorlax sno = new Snorlax();
+        nuevo.getPokemones().insertFinal(sno);
+        //gu1.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,17 +175,17 @@ public class Escoger extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Escoger().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Escoger().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton pikachu;
     // End of variables declaration//GEN-END:variables
