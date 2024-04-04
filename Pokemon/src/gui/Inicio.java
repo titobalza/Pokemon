@@ -133,16 +133,17 @@ jn.setBorderPainted(false);
 
     private void jnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnActionPerformed
         // TODO add your handling code here:
-String username = JOptionPane.showInputDialog("Ingrese username:");
+String name = JOptionPane.showInputDialog("Ingrese username:");
         
-        if (username.matches(".*[,].*")) {
+        if (name.matches(".*[,].*")) {
             JOptionPane.showMessageDialog(null, "El username no debe contener comas.");
         } else{
-        if(nuevo.validarUsuario(username)){
-            System.out.println("correcto");
+        if(nuevo.validarUsuario(name)){
+            username=name;
             this.escoger = new Escoger();
             escoger.setVisible(true);
             this.setVisible(false);
+            
         }else{
             JOptionPane.showMessageDialog(null, "Debe Cargar su Anterior juego o cree un nuevo usuario.");
         }}
