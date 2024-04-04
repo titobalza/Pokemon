@@ -240,7 +240,7 @@ String username = JOptionPane.showInputDialog("Ingrese username:");
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         
-        // Agregar los créditosa
+        // Agregar los créditos
         panel.add(new JLabel("Créditos:"));
         panel.add(new JLabel("- Iconos: https://sprites.pmdcollab.org"));
         panel.add(new JLabel("- Sonidos: https://downloads.khinsider.com/game-soundtracks/album/pokemon-ruby-sapphire-music-super-complete"));
