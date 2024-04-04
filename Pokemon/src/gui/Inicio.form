@@ -53,7 +53,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="0" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="juego nuevo"/>
+            <Property name="text" type="java.lang.String" value="Juego Nuevo"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jnActionPerformed"/>
@@ -72,7 +72,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="0" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="cargar juego"/>
+            <Property name="text" type="java.lang.String" value="Cargar Juego"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cjActionPerformed"/>
@@ -91,8 +91,11 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="0" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="como jugar"/>
+            <Property name="text" type="java.lang.String" value="C&#xf3;mo Jugar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cj2ActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="20" y="110" width="160" height="-1"/>
@@ -107,8 +110,11 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="0" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="creditos"/>
+            <Property name="text" type="java.lang.String" value="Cr&#xe9;ditos"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="20" y="150" width="160" height="-1"/>

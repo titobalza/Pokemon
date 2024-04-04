@@ -291,7 +291,8 @@ public class Principal2 extends javax.swing.JFrame {
         estado3.setText("Normal");
         jPanel1.add(estado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, -1, -1));
 
-        jButton1.setText("Ir a Tienda");
+        jButton1.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
+        jButton1.setText("Tienda");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -299,6 +300,7 @@ public class Principal2 extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 100, -1));
 
+        Pokemon.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         Pokemon.setText("Pokemon");
         Pokemon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,6 +309,7 @@ public class Principal2 extends javax.swing.JFrame {
         });
         jPanel1.add(Pokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 100, -1));
 
+        jButton3.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         jButton3.setText("Jugar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

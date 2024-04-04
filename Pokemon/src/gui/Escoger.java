@@ -36,6 +36,9 @@ public class Escoger extends javax.swing.JFrame {
         } catch (LineUnavailableException ex) {
             Logger.getLogger(Escoger.class.getName()).log(Level.SEVERE, null, ex);
         }
+        cj2.setOpaque(false);
+cj2.setContentAreaFilled(false);
+cj2.setBorderPainted(false);
     }
 
     /**
@@ -52,7 +55,7 @@ public class Escoger extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        cj2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,13 +87,14 @@ public class Escoger extends javax.swing.JFrame {
         jLabel3.setText("Escoja su pokemon");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
 
-        jButton1.setText("O presione aquí para tener los 2");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cj2.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
+        cj2.setText("O presione aquí para tener los 2");
+        cj2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cj2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
+        jPanel1.add(cj2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/7951512.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -109,7 +113,7 @@ public class Escoger extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cj2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cj2ActionPerformed
         // TODO add your handling code here:
         Principal2 gu2=null;
         try {
@@ -125,7 +129,7 @@ public class Escoger extends javax.swing.JFrame {
         Pikachu pika = new Pikachu();
         gu2.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cj2ActionPerformed
 
     private void pikachuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pikachuActionPerformed
         try {
@@ -194,7 +198,7 @@ public class Escoger extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton cj2;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

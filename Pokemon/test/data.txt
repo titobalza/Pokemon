@@ -1,3 +1,6 @@
 ,luarlaele,pokemon.Pikachu@84201b2,37,197,440,100,
 ,luarlal,pokemon.Snorlax@678c65ae,54,104,87,100,
-,kk,Both,69,48,0;74,u;u100u
+,lal,pokemon.Pikachu@75ec8370,2,2,0,
+,lolo,Both,16,16,0;0,u;u
+,kk,Both,111,60,0;62,u;u100u
+,lolk,Both,2,2,0;0,u;u

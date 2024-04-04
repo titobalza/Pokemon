@@ -12,7 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import static main.main.username;
 
 /**
@@ -69,7 +72,7 @@ jn.setBorderPainted(false);
 
         jn.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         jn.setForeground(new java.awt.Color(51, 0, 102));
-        jn.setText("juego nuevo");
+        jn.setText("Juego Nuevo");
         jn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jnActionPerformed(evt);
@@ -79,7 +82,7 @@ jn.setBorderPainted(false);
 
         cj.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         cj.setForeground(new java.awt.Color(51, 0, 102));
-        cj.setText("cargar juego");
+        cj.setText("Cargar Juego");
         cj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cjActionPerformed(evt);
@@ -89,12 +92,22 @@ jn.setBorderPainted(false);
 
         cj2.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         cj2.setForeground(new java.awt.Color(51, 0, 102));
-        cj2.setText("como jugar");
+        cj2.setText("Cómo Jugar");
+        cj2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cj2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(cj2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 160, -1));
 
         c.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         c.setForeground(new java.awt.Color(51, 0, 102));
-        c.setText("creditos");
+        c.setText("Créditos");
+        c.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cActionPerformed(evt);
+            }
+        });
         jPanel1.add(c, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 160, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cute-yellow-mouse-playing-with-butterfly-background-free-vector.jpg"))); // NOI18N
@@ -120,7 +133,11 @@ jn.setBorderPainted(false);
 
     private void jnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnActionPerformed
         // TODO add your handling code here:
-        username = JOptionPane.showInputDialog("Ingrese username:");
+String username = JOptionPane.showInputDialog("Ingrese username:");
+        
+        if (username.matches(".*[,].*")) {
+            JOptionPane.showMessageDialog(null, "El username no debe contener comas.");
+        } else{
         if(nuevo.validarUsuario(username)){
             System.out.println("correcto");
             this.escoger = new Escoger();
@@ -128,7 +145,7 @@ jn.setBorderPainted(false);
             this.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(null, "Debe Cargar su Anterior juego o cree un nuevo usuario.");
-        }
+        }}
     }//GEN-LAST:event_jnActionPerformed
 
     private void cjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cjActionPerformed
@@ -201,6 +218,38 @@ jn.setBorderPainted(false);
         }
         }
     }//GEN-LAST:event_cjActionPerformed
+
+    private void cj2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cj2ActionPerformed
+        // TODO add your handling code here:
+        String mensaje = "Bienvenido!\n\n";
+        mensaje += "Instrucciones del juego (tras presionar botón juego nuevo):\n";
+        mensaje += "- Primero, elige una modalidad de juego:\n";
+        mensaje += "  - Jugar solo con Pikachu\n";
+        mensaje += "  - Jugar solo con Snorlax\n";
+        mensaje += "  - Jugar con ambos\n";
+        mensaje += "- Una vez elegida la modalidad, el juego comenzará.\n";
+        mensaje += "- Podrás ver el estado de tu Pokémon y jugar con él.\n";
+        mensaje += "- También podrás ir a la tienda y comprarle regalos.\n";
+        mensaje += "- En la sección 'Pokémon', podrás ver su relación numéricamente y la lista de los regalos.\n";
+        mensaje += "- Después de cerrar y volver a abrir el programa, podrás ingresar tu mismo username y \nreanudar el progreso que tenías antes, intacto. \nNi la amistad, ni los regalos se pierden como en la vida debería ser.  :)\n";
+        JOptionPane.showMessageDialog(null, mensaje, "Cómo jugar", JOptionPane.QUESTION_MESSAGE);
+    }//GEN-LAST:event_cj2ActionPerformed
+
+    private void cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cActionPerformed
+        // TODO add your handling code here:
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        
+        // Agregar los créditos
+        panel.add(new JLabel("Créditos:"));
+        panel.add(new JLabel("- Iconos: https://sprites.pmdcollab.org"));
+        panel.add(new JLabel("- Sonidos: https://downloads.khinsider.com/game-soundtracks/album/pokemon-ruby-sapphire-music-super-complete"));
+        panel.add(new JLabel("- Imagen de fondo: https://www.freepik.es/vectores/fondos-animado/6"));
+        panel.add(new JLabel("- Fondo de Pikachu: https://www.vecteezy.com/vector-art/24851353-cute-yellow-mouse-playing-with-butterfly-background"));
+
+        // Mostrar el JOptionPane personalizado
+        JOptionPane.showMessageDialog(null, panel, "Créditos", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_cActionPerformed
 
     /**
      * @param args the command line arguments
