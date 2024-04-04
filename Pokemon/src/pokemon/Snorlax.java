@@ -1,5 +1,6 @@
 package pokemon;
 
+import edd.Nodo;
 import files.Regalo;
 import java.util.Random;
 import java.util.Scanner;
@@ -34,6 +35,35 @@ public class Snorlax extends Pokemon{
     
     public Snorlax( int am){
         this.amistad=am;
+    }
+    
+    public void addGiftHistory(Regalo gift){
+        this.regalos.insertar(gift);
+        this.regalos2.insertFinal(gift);
+    }
+    
+    public String listaToString(){
+        Nodo aux = this.regalos2.getHead();
+        String respuesta =",";
+        while(aux!=null){
+            Regalo gift = (Regalo)aux.getElement();
+            respuesta += Integer.toString(gift.getCosto());
+            respuesta+=",";
+            aux=aux.getNext();
+        }
+        return respuesta;
+    }
+    
+    public String listaToStringB(){
+        Nodo aux = this.regalos2.getHead();
+        String respuesta ="u";
+        while(aux!=null){
+            Regalo gift = (Regalo)aux.getElement();
+            respuesta += Integer.toString(gift.getCosto());
+            respuesta+="u";
+            aux=aux.getNext();
+        }
+        return respuesta;
     }
     
     @Override

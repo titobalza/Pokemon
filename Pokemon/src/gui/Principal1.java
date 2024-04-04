@@ -4,12 +4,18 @@
  */
 package gui;
 
+import files.Regalo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
@@ -104,10 +110,39 @@ public final class Principal1 extends javax.swing.JFrame {
     addWindowListener(new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent e) {
-            // Escribir en un archivo de texto
+            String filePath = "test//data.txt";            
+            // Validar si el nombre de usuario ya existe en el archivo de texto
+            boolean usuarioExistente = false;
+            List<String> lines = new ArrayList<>();
             try {
-                FileWriter writer = new FileWriter("test//data.txt", true); // Abre el archivo en modo de apendizaje
-                writer.write(","+username + "," + mascota.toString() + "," + saldo + "," + segundos +","+mascota.getAmistad()+ "\n"); // Agrega un salto de línea al final de cada registro
+                File file = new File(filePath);
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] datos = line.split(",");
+                    String usernameExistente = datos[1].trim(); // Suponiendo que el nombre de usuario está en la segunda posición
+                    if (usernameExistente.equals(username)) {
+                        usuarioExistente = true;
+                    } else {
+                        lines.add(line);
+                    }
+                }
+                scanner.close();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+            
+            // Escribir en el archivo de texto
+            try {
+                FileWriter writer = new FileWriter(filePath);
+                for (String line : lines) {
+                    writer.write(line + "\n");
+                }
+                if (usuarioExistente) {
+                    writer.write("," + username + "," +mascota.toString()+ "," + saldo + "," + segundos + "," + mascota.getAmistad() +mascota.listaToString()+ "\n");
+                }else{
+                    writer.write("," + username + "," +mascota.toString()+ "," + saldo + "," + segundos + "," + mascota.getAmistad() +mascota.listaToString()+ "\n");
+                }
                 writer.close();
                 thread.interrupt();
             } catch (IOException ex) {
@@ -145,7 +180,7 @@ public final class Principal1 extends javax.swing.JFrame {
     }
     
     
-    public Principal1(int saldou,int time,int ami) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public Principal1(String user,int saldou,int time,int ami,String[] regalos) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -157,7 +192,16 @@ public final class Principal1 extends javax.swing.JFrame {
         this.mostrarTiempoTranscurrido();
         this.mainFrame();
         segundos = time;
+        username=user;
         thread.start();
+        try{
+            for(int i=0;i<regalos.length;i++){
+                Regalo gift = new Regalo(Integer.parseInt(regalos[i]));
+                mascota.addGiftHistory(gift);
+            }
+        }catch(Exception e){
+            
+        }
         
     }
     
@@ -247,14 +291,16 @@ public final class Principal1 extends javax.swing.JFrame {
 
     private void PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PActionPerformed
         // TODO add your handling code here:
+        saldo+=10;
         mascota.showPokemon(estado.getText());
 
     }//GEN-LAST:event_PActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        saldo+=10;
         int aux = saldo;
-        int finale = nuevo.tienda(saldo,mascota);
+        int finale = nuevo.tiendaSno(saldo,mascota);
         saldo=(saldo-aux)+finale; 
     }//GEN-LAST:event_jButton1ActionPerformed
 

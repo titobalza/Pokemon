@@ -70,7 +70,7 @@ public class functions {
         functions.pokemones.insertFinal(pok);
     }
     
-    public int tienda(int saldo,Pikachu pika){
+    public int tiendaPika(int saldo,Pikachu pika){
         String[] opciones = {
             "Baya Aranja 100 Watts +100 Relación",
             "Baya Caquic 200 Watts +250 Relación",
@@ -131,7 +131,7 @@ public class functions {
     return saldo;
     }
     
-    public int tienda(int saldo,Snorlax pika){
+    public int tiendaSno(int saldo,Snorlax pika){
         String[] opciones = {
             "Baya Aranja 100 Watts +100 Relación",
             "Baya Caquic 200 Watts +250 Relación",

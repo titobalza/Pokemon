@@ -5,6 +5,8 @@
 package gui;
 
 import files.functions;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -93,7 +95,7 @@ jn.setBorderPainted(false);
         c.setFont(new java.awt.Font("Silom", 1, 14)); // NOI18N
         c.setForeground(new java.awt.Color(51, 0, 102));
         c.setText("creditos");
-        jPanel1.add(c, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 130, -1));
+        jPanel1.add(c, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 160, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cute-yellow-mouse-playing-with-butterfly-background-free-vector.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -133,9 +135,70 @@ jn.setBorderPainted(false);
         // TODO add your handling code here:
         String name = JOptionPane.showInputDialog("Ingrese username:");
         if(nuevo.validarUsuario(name)){
-            System.out.println("correcto");
+            JOptionPane.showMessageDialog(null, "No tiene juegos guardados.\nCree uno nuevo.");
         }else{
-            System.out.println("falso");
+            String lineaEncontrada="";
+            try (BufferedReader br = new BufferedReader(new FileReader("test//data.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.contains(","+name+",")) {
+                    lineaEncontrada = linea;
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String[] base = lineaEncontrada.split(",");
+        String[] elementosAdicionales = new String[0];
+        if (base.length > 6) {
+            elementosAdicionales = new String[base.length - 6];
+            for (int i = 6; i < base.length; i++) {
+                elementosAdicionales[i - 6] = base[i];
+            }
+        }
+        if(base[2].contains("Pikachu")){
+            try {
+                Principal menu = new Principal(base[1],Integer.parseInt(base[3]),Integer.parseInt(base[4]),Integer.parseInt(base[5]),elementosAdicionales);
+                menu.setVisible(true);
+                this.setVisible(false);
+            } catch (IOException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (LineUnavailableException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+        }else if(base[2].contains("Snorlax")){
+            try {
+                Principal1 menu = new Principal1(base[1],Integer.parseInt(base[3]),Integer.parseInt(base[4]),Integer.parseInt(base[5]),elementosAdicionales);
+                menu.setVisible(true);
+                this.setVisible(false);
+            } catch (IOException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (LineUnavailableException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            //String user,int saldou,int time,int amiPika,int amiSno,String[] regalosPika,String[] regalosSno
+            try {
+                String[] regalos = base[6].split(";");
+                String[] regalospika = regalos[0].split("u");
+                String[] regalossno = regalos[1].split("u");
+                Principal2 menu = new Principal2(base[1],Integer.parseInt(base[3]),Integer.parseInt(base[4]), Integer.parseInt(base[5].split(";")[0]),Integer.parseInt(base[5].split(";")[1]),regalospika,regalossno);
+                menu.setVisible(true);
+                this.setVisible(false);
+            } catch (IOException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (LineUnavailableException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         }
     }//GEN-LAST:event_cjActionPerformed
 

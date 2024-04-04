@@ -1,4 +1,5 @@
 package pokemon;
+import edd.Nodo;
 import files.Regalo;
 import java.util.Random;
 import java.util.Scanner;
@@ -44,6 +45,10 @@ public class Pikachu extends Pokemon{
         this.regalos.insertar(gift);
         this.regalos2.insertFinal(gift);
         this.amistad+=gift.getAmistad();
+    }
+    public void addGiftHistory(Regalo gift){
+        this.regalos.insertar(gift);
+        this.regalos2.insertFinal(gift);
     }
 
     @Override
@@ -138,7 +143,34 @@ public class Pikachu extends Pokemon{
     void darAmistad(int n) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public String listaToString(){
+        Nodo aux = this.regalos2.getHead();
+        String respuesta =",";
+        while(aux!=null){
+            Regalo gift = (Regalo)aux.getElement();
+            respuesta += Integer.toString(gift.getCosto());
+            respuesta+=",";
+            aux=aux.getNext();
+        }
+        return respuesta;
     }
+    
+    public String listaToStringB(){
+        Nodo aux = this.regalos2.getHead();
+        String respuesta ="u";
+        while(aux!=null){
+            Regalo gift = (Regalo)aux.getElement();
+            respuesta += Integer.toString(gift.getCosto());
+            respuesta+="u";
+            aux=aux.getNext();
+        }
+        return respuesta;
+    }
+    
+    }
+
+
 
     
     
