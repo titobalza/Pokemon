@@ -5,7 +5,8 @@
 package files;
 
 /**
- *
+ * Clase que representa un regalo con su costo, nivel de amistad y nombre.
+ * 
  * @author nelsoncarrillo
  */
 public class Regalo {
@@ -13,6 +14,10 @@ public class Regalo {
     public int amistad;
     private String nombre;
     
+    /**
+     * Constructor de la clase Regalo.
+     * @param auxFinale El costo del regalo.
+     */
     public Regalo(int auxFinale){
         this.costo=auxFinale;
         switch (auxFinale) {
@@ -64,36 +69,43 @@ public class Regalo {
             default:
                 break;
         }
-        
     }
 
     /**
-     * @return the costo
+     * Obtiene el costo del regalo.
+     * @return El costo del regalo.
      */
     public int getCosto() {
         return costo;
     }
     
+    /**
+     * Obtiene el nivel de amistad que otorga el regalo.
+     * @return El nivel de amistad del regalo.
+     */
     public int getAmistad() {
         return amistad;
     }
 
     /**
-     * @param costo the costo to set
+     * Establece el costo del regalo.
+     * @param costo El costo a establecer.
      */
     public void setCosto(int costo) {
         this.costo = costo;
     }
 
     /**
-     * @return the nombre
+     * Obtiene el nombre del regalo.
+     * @return El nombre del regalo.
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre the nombre to set
+     * Establece el nombre del regalo.
+     * @param nombre El nombre a establecer.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;

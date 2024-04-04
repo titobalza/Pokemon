@@ -7,7 +7,9 @@ package edd;
 import files.Regalo;
 
 /**
- *
+ * The NodoAVL class represents a node in an AVL tree.
+ * It contains a Regalo object, height information, and references to left and right child nodes.
+ * 
  * @author nelsoncarrillo
  */
 public class NodoAVL {
@@ -16,8 +18,13 @@ public class NodoAVL {
     NodoAVL izquierdo;
     NodoAVL derecho;
 
+    /**
+     * Constructs a new NodoAVL object with the given Regalo object.
+     * 
+     * @param value The Regalo object to be stored in the node.
+     */
     public NodoAVL(Regalo value) {
-        regalo=value;
+        regalo = value;
         altura = 1;
     }
 }

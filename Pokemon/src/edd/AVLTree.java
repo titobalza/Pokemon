@@ -6,12 +6,17 @@ package edd;
 
 import files.Regalo;
 /**
- *
+ * Clase AVLTree que representa un árbol AVL.
+ * Permite insertar elementos y realizar recorridos en orden.
  * @author nelsoncarrillo
  */
 public class AVLTree {
     private NodoAVL raiz;
 
+    /**
+     * Inserta un nuevo regalo en el árbol AVL.
+     * @param regalo El regalo a insertar.
+     */
     public void insertar(Regalo regalo) {
         raiz = insertarNodo(raiz, regalo);
     }
@@ -21,9 +26,9 @@ public class AVLTree {
             return new NodoAVL(regalo);
         }
 
-        if (regalo.costo<nodo.regalo.costo) {
+        if (regalo.costo < nodo.regalo.costo) {
             nodo.izquierdo = insertarNodo(nodo.izquierdo, regalo);
-        } else if (regalo.costo>nodo.regalo.costo) {
+        } else if (regalo.costo > nodo.regalo.costo) {
             nodo.derecho = insertarNodo(nodo.derecho, regalo);
         } else {
             // Duplicado, no se permiten regalos repetidos
@@ -34,20 +39,20 @@ public class AVLTree {
 
         int balance = obtenerBalance(nodo);
 
-        if (balance > 1 && regalo.costo<nodo.regalo.costo) {
+        if (balance > 1 && regalo.costo < nodo.regalo.costo) {
             return rotacionDerecha(nodo);
         }
 
-        if (balance < -1 && regalo.costo>nodo.regalo.costo) {
+        if (balance < -1 && regalo.costo > nodo.regalo.costo) {
             return rotacionIzquierda(nodo);
         }
 
-        if (balance > 1 && regalo.costo>nodo.regalo.costo) {
+        if (balance > 1 && regalo.costo > nodo.regalo.costo) {
             nodo.izquierdo = rotacionIzquierda(nodo.izquierdo);
             return rotacionDerecha(nodo);
         }
 
-        if (balance < -1 && regalo.costo<nodo.regalo.costo) {
+        if (balance < -1 && regalo.costo < nodo.regalo.costo) {
             nodo.derecho = rotacionDerecha(nodo.derecho);
             return rotacionIzquierda(nodo);
         }
@@ -95,10 +100,18 @@ public class AVLTree {
         return obtenerAltura(nodo.izquierdo) - obtenerAltura(nodo.derecho);
     }
     
+    /**
+     * Obtiene la raíz del árbol AVL.
+     * @return La raíz del árbol AVL.
+     */
     public NodoAVL getRoot(){
         return this.raiz;
     }
     
+    /**
+     * Realiza un recorrido en orden del árbol AVL y devuelve una representación en forma de cadena.
+     * @return La representación en forma de cadena del recorrido en orden del árbol AVL.
+     */
     public String recorridoInorden() {
         StringBuilder sb = new StringBuilder();
         recorridoInorden(raiz, sb);
@@ -108,11 +121,8 @@ public class AVLTree {
     private void recorridoInorden(NodoAVL nodo, StringBuilder sb) {
         if (nodo != null) {
             recorridoInorden(nodo.izquierdo, sb);
-            sb.append(nodo.regalo.getNombre()+"\n");
+            sb.append(nodo.regalo.getNombre()).append("\n");
             recorridoInorden(nodo.derecho, sb);
         }
     }
-
-
-    
 }

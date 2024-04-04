@@ -12,9 +12,15 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author nelsoncarrillo
- */
+*                    Extra Credits.
+*                  Universidad Metropolitana
+*                     Estructura de Datos
+*                  Prof. Fernando Torre secc. 3
+*                Hecho por: Nelson Carrillo
+*                           Tito Balza
+* 
+* @author nelsoncarrillo & tito_
+*/
 public class main {
     
     public static functions nuevo;
@@ -29,51 +35,6 @@ public class main {
         Inicio menu = new Inicio();
         menu.setVisible(true);
         
-        /**
-        String[] palabras = {"pikachu", "charizard", "bulbasaur", "squirtle", "jigglypuff"};
-        String palabraSeleccionada = palabras[(int) (Math.random() * palabras.length)];
-        
-        char[] palabraAdivinada = new char[palabraSeleccionada.length()];
-        for (int i = 0; i < palabraAdivinada.length; i++) {
-            palabraAdivinada[i] = '_';
-        }
-        
-        int intentosRestantes = 6;
-        boolean juegoTerminado = false;
-        
-        JOptionPane.showMessageDialog(null, "¡Bienvenido al juego del ahorcado!");
-        
-        while (!juegoTerminado) {
-            JOptionPane.showMessageDialog(null, "Palabra a adivinar: " + String.valueOf(palabraAdivinada));
-            JOptionPane.showMessageDialog(null, "Intentos restantes: " + intentosRestantes);
-            String letra = JOptionPane.showInputDialog("Ingresa una letra:");
-            
-            boolean letraAdivinada = false;
-            
-            for (int i = 0; i < palabraSeleccionada.length(); i++) {
-                if (palabraSeleccionada.charAt(i) == letra.charAt(0)) {
-                    palabraAdivinada[i] = letra.charAt(0);
-                    letraAdivinada = true;
-                }
-            }
-            
-            if (!letraAdivinada) {
-                intentosRestantes--;
-                JOptionPane.showMessageDialog(null, "La letra no está en la palabra. ¡Intento fallido!");
-                if (intentosRestantes == 0) {
-                    juegoTerminado = true;
-                    JOptionPane.showMessageDialog(null, "¡Has perdido! La palabra correcta era: " + palabraSeleccionada);
-                }
-            }
-            
-            if (String.valueOf(palabraAdivinada).equals(palabraSeleccionada)) {
-                juegoTerminado = true;
-                JOptionPane.showMessageDialog(null, "¡Felicidades! Has adivinado la palabra correctamente: " + palabraSeleccionada);
-            }
-        }
-        
-        JOptionPane.showMessageDialog(null, "Fin del juego. ¡Gracias por jugar!");
-    **/
     } 
     
     

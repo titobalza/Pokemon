@@ -15,7 +15,8 @@ import javax.swing.JOptionPane;
 import pokemon.*;
 
 /**
- *
+ * Clase que contiene diferentes funciones relacionadas con el juego.
+ * 
  * @author nelsoncarrillo
  */
 public class functions {
@@ -24,7 +25,7 @@ public class functions {
     public static Lista pokemones = new Lista();
     
     /**
-     *
+     * Valida si ya esta registrado.
      * @param nombreUsuario
      * @return
      */
@@ -42,6 +43,14 @@ public class functions {
         return true; // El nombre de usuario es válido
     }
     
+    /**
+     * inicia el sonido.
+     * 
+     * @param rutaArchivo
+     * @throws IOException
+     * @throws UnsupportedAudioFileException
+     * @throws LineUnavailableException 
+     */
     public void reproducirAudio(String rutaArchivo) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         File archivo = new File(rutaArchivo);
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(archivo);
@@ -50,7 +59,9 @@ public class functions {
         clip.start();
     }
 
-    
+    /**
+     * Detiene el sonido que se reproduce.
+     */
     public void detenerReproduccion() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
@@ -58,18 +69,38 @@ public class functions {
         }
     }
     
+    /**
+     * Lista de pokemones getter.
+     * @return Lista de pokemones
+     */
     public Lista getPokemones(){
         return pokemones;
     }
     
+    /**
+     * inserta un pokemon
+     * @param pok pikachu
+     */
     public void insertarPokemon(Pikachu pok){
         functions.pokemones.insertFinal(pok);
     }
     
+    /**
+     * inserta un pokemon
+     * @param pok snorlax
+     */
     public void insertarPokemon(Snorlax pok){
         functions.pokemones.insertFinal(pok);
     }
     
+    /**
+     * Despliega y valida acorde al saldo las opciones para comprar regalos.
+     * Esto en la tienda para ambos pokemones.
+     * 
+     * @param saldo
+     * @param pika
+     * @return balance final
+     */
     public int tiendaPika(int saldo,Pikachu pika){
         String[] opciones = {
             "Baya Aranja 100 Watts +100 Relación",
@@ -131,6 +162,14 @@ public class functions {
     return saldo;
     }
     
+    /**
+     * Despliega y valida acorde al saldo las opciones para comprar regalos.
+     * Esto en la tienda para ambos pokemones. este es para snorlax
+     * 
+     * @param saldo
+     * @param pika Snorlax ahora
+     * @return balance final
+     */
     public int tiendaSno(int saldo,Snorlax pika){
         String[] opciones = {
             "Baya Aranja 100 Watts +100 Relación",
@@ -190,12 +229,6 @@ public class functions {
             }
         }
     return saldo;
-    }
-    
-    public void adjuntarRegalo(int auxFinale,Pikachu pika){
-        if(auxFinale>0){
-            
-        }
     }
     
 }
